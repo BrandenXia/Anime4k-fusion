@@ -1,0 +1,19 @@
+GPU Apple M1 | OS Version 26.6.2 (Build 25G83) | 16x8 groups | RGBA16Float | float accumulators
+check 37x23 separate       differences=0 max_abs=0 mean_abs=0
+check 37x23 head_shuffle   differences=0 max_abs=0 mean_abs=0
+check 37x23 tail_three     differences=0 max_abs=0 mean_abs=0
+check 37x23 spatial_pairs  differences=0 max_abs=0 mean_abs=0
+check 37x23 combined       differences=0 max_abs=0 mean_abs=0
+check 37x23 algebra_tail   differences=177 max_abs=0.000976562 mean_abs=4.11054923e-06
+check 1280x720 separate       differences=0 max_abs=0 mean_abs=0
+check 1280x720 head_shuffle   differences=0 max_abs=0 mean_abs=0
+check 1280x720 tail_three     differences=0 max_abs=0 mean_abs=0
+check 1280x720 spatial_pairs  differences=0 max_abs=0 mean_abs=0
+check 1280x720 combined       differences=0 max_abs=0 mean_abs=0
+check 1280x720 algebra_tail   differences=156220 max_abs=0.000976562 mean_abs=3.18267383e-06
+check 1920x1080 separate       differences=0 max_abs=0 mean_abs=0
+check 1920x1080 head_shuffle   differences=0 max_abs=0 mean_abs=0
+check 1920x1080 tail_three     differences=0 max_abs=0 mean_abs=0
+check 1920x1080 spatial_pairs  differences=0 max_abs=0 mean_abs=0
+check 1920x1080 combined       differences=0 max_abs=0 mean_abs=0
+check 1920x1080 algebra_tail   differences=349979 max_abs=0.000976562 mean_abs=3.16999088e-06
