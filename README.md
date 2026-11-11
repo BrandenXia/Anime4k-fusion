@@ -15,6 +15,20 @@ Times are median milliseconds per frame. Brackets give the 10th and 90th percent
 | Fuse the spatial pairs and the final three passes | 4 | 6.84 [6.28, 8.17] | 15.01 [14.50, 15.64] |
 | Final three fused, plus algebraic rewrite across the network | 7 | 5.49 [4.80, 6.27] | 11.31 [11.24, 12.40] |
 
+## Usage
+
+Shader files are provided in [`mpv/shaders`](./mpv/shaders)
+
+| Mode | Combination |
+|:----:| ----------- |
+| A | `~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Restore_CNN_M_Fused.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_M_Fused.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S_Fused.glsl` |
+| B | `~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Restore_CNN_Soft_M_Fused.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_M_Fused.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S_Fused.glsl` |
+| C | `~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Upscale_Denoise_CNN_x2_M_Fused.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S_Fused.glsl` |
+| A + A | `~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Restore_CNN_M_Fused.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_M_Fused.glsl:~~/shaders/Anime4K_Restore_CNN_S.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S_Fused.glsl` |
+| B + B | `~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Restore_CNN_Soft_M_Fused.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_M_Fused.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Restore_CNN_Soft_S.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S_Fused.glsl` |
+| C + A | `~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Upscale_Denoise_CNN_x2_M_Fused.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Restore_CNN_S.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_S_Fused.glsl` |
+| A + A (HQ) | `~~/shaders/Anime4K_Clamp_Highlights.glsl:~~/shaders/Anime4K_Restore_CNN_VL.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_VL_Fused.glsl:~~/shaders/Anime4K_Restore_CNN_M_Fused.glsl:~~/shaders/Anime4K_AutoDownscalePre_x2.glsl:~~/shaders/Anime4K_AutoDownscalePre_x4.glsl:~~/shaders/Anime4K_Upscale_CNN_x2_M_Fused.glsl` |
+
 ## What changes inside a kernel
 
 The 1×1 projection reads all seven convolution outputs at one input pixel and produces four subpixel residuals. Fusing the last convolution, projection and shuffle lets the thread calculate the seventh feature from the sixth feature texture, combine it with the six earlier features, and write its four output pixels. This saves two intermediate texture writes and subsequent reads per input pixel, while preserving each layer's FP16 rounding.
