@@ -17,7 +17,11 @@ Times are median milliseconds per frame. Brackets give the 10th and 90th percent
 
 ## Usage
 
-Shader files are provided in [`mpv/shaders`](./mpv/shaders)
+Shader files are provided in [`mpv/shaders`](./mpv/shaders).
+
+**IINA OpenGL 4.1 support** is available in the `*_Fused_OpenGL.glsl` variants. These use fragment shaders and software FP16 rounding. The earlier `*_Fused.glsl` variants require shader features absent from IINA 1.5.1's OpenGL renderer and can produce a black screen there.
+
+For IINA, copy the `*_Fused_OpenGL.glsl` files into your shader directory and select them through your shader-management plugin. In the combinations below, replace each `_Fused.glsl` filename with `_Fused_OpenGL.glsl`. The HQ restore stage also has an OpenGL fused variant, `Anime4K_Restore_CNN_VL_Fused_OpenGL.glsl`. Keep the original upstream helper shaders installed for the remaining stages. Details, numerical checks, and renderer timings are in [the OpenGL implementation notes](mpv/OPENGL.md).
 
 | Mode | Combination |
 |:----:| ----------- |
